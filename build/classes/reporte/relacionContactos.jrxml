@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="9d62732a-0dfa-4051-9c5f-c083cd5655d5">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="CONTACTO" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     tbl_contacto.`CONT_AP_MATERNO` AS tbl_contacto_CONT_AP_MATERNO,
+     tbl_contacto.`CONT_AP_PATERNO` AS tbl_contacto_CONT_AP_PATERNO,
+     tbl_contacto.`FECHANAC` AS tbl_contacto_FECHANAC,
+     tbl_contacto.`CONT_NOMBRE` AS tbl_contacto_CONT_NOMBRE,
+     tbl_contacto.`CONT_SEXO` AS tbl_contacto_CONT_SEXO,
+     tbl_contacto.`CALLE` AS tbl_contacto_CALLE,
+     tbl_contacto.`CIUDAD` AS tbl_contacto_CIUDAD,
+     tbl_contacto.`DISTRITO` AS tbl_contacto_DISTRITO,
+     tbl_contacto.`NRO` AS tbl_contacto_NRO,
+     tbl_cita.`CITA_ID` AS tbl_cita_CITA_ID,
+     tbl_cita.`CITA_FECHA` AS tbl_cita_CITA_FECHA,
+     tbl_cita.`CITA_MOTIVO` AS tbl_cita_CITA_MOTIVO,
+     tbl_cita.`CONT_ID` AS tbl_cita_CONT_ID
+FROM
+     `tbl_contacto` tbl_contacto INNER JOIN `tbl_cita` tbl_cita ON tbl_contacto.`CONT_ID` = tbl_cita.`CONT_ID`
+WHERE
+     tbl_contacto.`CONT_AP_PATERNO` = $P{CONTACTO}]]>
+	</queryString>
+	<field name="tbl_contacto_CONT_AP_MATERNO" class="java.lang.String"/>
+	<field name="tbl_contacto_CONT_AP_PATERNO" class="java.lang.String"/>
+	<field name="tbl_contacto_FECHANAC" class="java.sql.Timestamp"/>
+	<field name="tbl_contacto_CONT_NOMBRE" class="java.lang.String"/>
+	<field name="tbl_contacto_CONT_SEXO" class="java.lang.String"/>
+	<field name="tbl_contacto_CALLE" class="java.lang.String"/>
+	<field name="tbl_contacto_CIUDAD" class="java.lang.String"/>
+	<field name="tbl_contacto_DISTRITO" class="java.lang.String"/>
+	<field name="tbl_contacto_NRO" class="java.lang.String"/>
+	<field name="tbl_cita_CITA_ID" class="java.lang.Long"/>
+	<field name="tbl_cita_CITA_FECHA" class="java.sql.Timestamp"/>
+	<field name="tbl_cita_CITA_MOTIVO" class="java.lang.String"/>
+	<field name="tbl_cita_CONT_ID" class="java.lang.Long"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<textField pattern="MMMMM dd, yyyy">
+				<reportElement x="419" y="15" width="136" height="20" uuid="3ed4cd15-ab98-4ad5-9143-b7a81150c94e"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="102" splitType="Stretch">
+			<image>
+				<reportElement x="0" y="0" width="197" height="102" uuid="55c8f1b9-2b77-4321-aa14-a2efe2140e0b"/>
+				<imageExpression><![CDATA["\\img\\450_1000.jpg"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="215" y="71" width="340" height="31" uuid="6a0cfc90-e2bc-44c1-9da1-3fd4c5bdcd8c"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font size="22" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Agenda de Contactos]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="68" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="30" width="242" height="31" uuid="8ae627a9-cf5d-4bf3-92e3-16ba170174b9"/>
+				<textElement markup="none">
+					<font fontName="Arial" size="20" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[Nombre y Apellido Paterno]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="321" y="30" width="181" height="31" uuid="4c090037-cb09-4105-bfa1-c573ac2df9d3"/>
+				<textElement>
+					<font fontName="Arial" size="20" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[Cita]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="34" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="242" height="20" uuid="5d03364c-a85d-4db9-b7bd-0eac417e2f4d"/>
+				<textElement markup="none">
+					<font fontName="Arial" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tbl_contacto_CONT_NOMBRE}+ ' ' +$F{tbl_contacto_CONT_AP_PATERNO}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="321" y="0" width="234" height="20" uuid="5b6036e7-716b-4702-83d8-7b62795f190a"/>
+				<textElement>
+					<font fontName="Arial" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tbl_cita_CITA_MOTIVO}+"\t"+$F{tbl_cita_CITA_FECHA}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch">
+			<textField>
+				<reportElement x="197" y="22" width="80" height="20" uuid="07fcbd4b-18de-4b3d-a9c6-ead504289bec"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="277" y="22" width="40" height="20" uuid="5baaf707-51a0-4929-8626-9ad5c4b6844a"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>
